@@ -3,28 +3,27 @@
 <a href="#logo" name="logo"><img src="https://raw.githubusercontent.com/bionanoimaging/UC2-GIT/master/IMAGES/UC2_logo_text.png" width="400"></a>
 </p>
 
-# openUC2 *PROJECT_NAME*
+# openUC2 *Micro Syringe Pump*
 ---
 
-This repository will help you to build and setup *A NICE TOOL*.
+This repository will help you to build and setup a syringe pump with *µl* precision for about 5€ in material costs. 
+It makes use of tiny stepper motors usually used to have small selfie cameras popping up from your cellphone for example. A detailed introduction into these stepper can for example be found at [Hacksters](https://www.hackster.io/news/these-two-small-steppers-are-one-giant-leap-for-maker-kind-7a6b3599cfae). People also created tiny [laser engraving systems](https://www.hackster.io/news/the-open-source-burninator-explores-what-two-linear-stepper-motors-and-laser-diode-can-do-5495318dcfb8) using this motor. 
 
-*DESCRIBE WHAT IT DOES AND WHAT IT IS FOR.*
+It's available at [Aliexpress](https://de.aliexpress.com/item/1005001421552415.html), where prices range from 1.20-4€. 
 
 Curious to see what this looks like? Keep scrolling!
 
-*INCLUDE A NICE PICTURE AND/OR SCHEME.*
-
 <p align="center">
-<a href="#logo" name="logo"><img src="./IMAGES/"></a>
+<a href="#logo" name="logo"><img src="./IMAGES/IMG_20220111_085021.jpg"></a>
 </p>
 
-The overall price is in the range *OF LESS THAT A ZILLION*.
+The overall price is in the range of ~5-10€ (depending on your resellers).
 
 
 ***Features:***
-* IT MOVES?!
-* IT TAKES IMAGES?!
-* IT DOES YOUR LAUNDRY?!
+* Microleter dispensing using low-cost syringes
+* 0.2 ml total volume
+* fits in a UC2 cube
 
 
 # Table of Content
@@ -36,26 +35,44 @@ The overall price is in the range *OF LESS THAT A ZILLION*.
 
 
 ## In-Action
-*SHARE YOUR FANCY GIF HERE. IT MOVES!*
+
+This is the single-sided version, but in order to not burn the linear steppers, we encourage to use two steppers to push the piston of the syringe. 
+You should see the linear level arm moving up and down.
 
 <p align="center">
-<a href="#logo" name="logo"><img src="./IMAGES/" width="600"></a>
+<a href="#logo" name="logo"><img src="./IMAGES/VID_20220110_094912.gif" width="600"></a>
+</p>
+
+We use this to control the flow in a FEP tube for light-sheet imaging. Here you see a zebra-fish moving back and forth passing the light-sheet:
+
+<p align="center">
+<a href="#logo" name="logo"><img src="./IMAGES/VID_20220110_140218.gif" width="600"></a>
 </p>
 
 
 # Software
-*HOW DO I CONTROL THIS THING?*
 
-## Custom Python code *IF APPLICABLE*
-We also provide a code example for driving the device using a python driver. Please refer to the code and the package in the folder [PYTHON](./PYTHON).
+We leave the software and electronics part to the interested user. The stepper motors behave as typical bipolar (e.g. NEMA) motors and can easily be connected to off-the shelf stepper drivers (e.g. A4988). For a detailed explanation please have a look e.g. [here](https://www.makerguides.com/drv8825-stepper-motor-driver-arduino-tutorial/). 
 
-## *CUSTOM FANCY SOFTWARE*
-We also provide *SOME SORCERY* for driving the device. Find the files in folder [*MY_AWESOME_SOFTWARE*]().
+The wiring with te tyical motor drivers is done as follows:
+
+```
+Motor driver:
+
+1--2--3--4
+|. |. |. |
+|. |. |. |
+A+ A- B- B+
+```
+
+<p align="center">
+<a href="#logo" name="logo"><img src="https://ae01.alicdn.com/kf/Hedc22b757f5f463b9b7291675a6dd792K.jpg?width=800&height=800&hash=1600" width="600"></a>
+</p>
+
 
 # Hardware
 
 Below we describe how the device can be build and assembled in order to replicate the whole system as shown in the rendering above. One needs additional parts that can be found in the core [openUC2 repository](https://github.com/bionanoimaging/UC2-GIT).
-
 
 ## Bill of material
 
@@ -63,12 +80,8 @@ Below you will find all components necessary to build this device
 
 ### 3D printing files
 
-All these files need to be printed. We used a Prusa i3 MK3 using PLA Prusament (Galaxy Black) at layer height x.x mm and infill xx%.
-
-
-|  Type | Details  |  Price | Link  |
-|---|---|---|---|
-| *FANCY* Holder |  *IT HOLD OTHER FANCY PARTS* |  x,xx € | [Part.stl](./STL/)  |
+All these files need to be printed. We used a Prusa i3 MK3 using PLA Prusament (Galaxy Black) at layer height 0.3 mm and infill 100%.
+Please have a look at the [STL](./STL)-folder.
 
 
 ### Additional parts
@@ -76,51 +89,22 @@ This is used in the current version of the setup
 
 |  Type | Details  |  Price | Link  |
 |---|---|---|---|
-| *FANCY* Part | *IT DOES SOME MAGIC* |  xx € | [My favourite online shop]()  |
+| 2x Micro Linear Stepper  | moves the syringe | 1.50 € | [Aliexpress](https://de.aliexpress.com/item/1005001421552415.html)  |
+| 1x 1ml Syringe  | - | 1.50 € | [Doccheck](https://www.doccheckshop.de/injektion-infusion/spritzen/feindosierungsspritzen/12275/bbraun-injekt-f-feindosierungsspritze?sPartner=google&number=110586&utm_campaign=versandkw&gclid=Cj0KCQiAuP-OBhDqARIsAD4XHpfTwykGH3wSOk8dRQvcmvvBdFwlpSBOijcBlMDO_y_j9ptW-hdIgPYaAuuoEALw_wcB)  |
+
+
+* some M2 screws
+* some wires
+*
 
 ### Design files
-The original design files are in the [INVENTOR](./INVENTOR) folder. *FOR ANOTHER FORMAT, GET YOUR OWN FOLDER.*
 
+The original design files are in the [INVENTOR](./INVENTOR) folder. 
 
 ### Electronics
-*THE FANCY ELECTRONICS TO RUN THE MOTOR! ...OR WHATEVER YOU USE THERE.*
 
+We used the arduino CNC shield v3 to drive the stepper. Make sure you start with a very low motor curent to not burn the small steppers!
 
-### Assembly of the DEVICE
-
-***1.*** *These are the parts needed for the DEVICE*
-
-<p align="center">
-<a> <img src="./IMAGES/" width="300"></a>
-</p>
-
-***2.*** *Start by ...*
-
-<p align="center">
-<a> <img src="./IMAGES/" width="300"></a>
-</p>
-
-***2.*** *Continue with ...*
-
-<p align="center">
-<a> <img src="./IMAGES/" width="300"></a>
-</p>
-
-***2.*** *DONE! LOOK AT THE BEAUTY!*
-
-<p align="center">
-<a> <img src="./IMAGES/" width="300"></a>
-</p>
-
-
-## Showcase
-*AWESOME RESULTS!*
-
-<p align="center">
-<a> <img src="./IMAGES/" width="300"></a>
-</p>
-
-***Fig 1.*** *MY MOST AWSOME IMAGE*
 
 
 ## Get Involved
